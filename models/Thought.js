@@ -1,4 +1,3 @@
-// models/Thought.js
 
 const mongoose = require('mongoose');
 

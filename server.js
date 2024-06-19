@@ -1,3 +1,5 @@
+
+
 const express = require('express');
 const mongoose = require('mongoose');
 const routes = require('./routes'); 
@@ -13,14 +15,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api', routes);
 
 
-mongoose.connect('mongodb://localhost:27017/socialDB', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect('mongodb://localhost:27017/social-api'); 
 
 mongoose.connection.once('open', () => {
   console.log('MongoDB connected successfully');
-  app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-  });
+}).on('error', (error) => {
+  console.error('MongoDB connection error:', error);
+});
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
